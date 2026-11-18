@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 02 — Philippine Income Tax Calculator | Jullianne S. Revellame</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Floating Purple Orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <nav>
+    <a href="index.html#about" class="nav-brand" style="text-decoration:none;">
+      <span class="brand-dot"></span> Jullianne S. Revellame
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about" class="tab-btn" style="text-decoration:none;">&larr; Portfolio</a>
+      <a href="index.html#programs" class="tab-btn" style="text-decoration:none;">All Programs</a>
+      <a href="assignment1.html" class="tab-btn " style="text-decoration:none;">01 &bull; Converter</a>
+      <a href="assignment2.html" class="tab-btn active" style="text-decoration:none;">02 &bull; Tax</a>
+      <a href="assignment3.html" class="tab-btn " style="text-decoration:none;">03 &bull; Loops</a>
+      <a href="assignment4.html" class="tab-btn " style="text-decoration:none;">04 &bull; Payroll</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <span class="badge">CS 1130 &bull; Assignment 02</span>
+      <h2>Philippine Income Tax Calculator</h2>
+      <p class="section-sub">Computes annual income tax using progressive TRAIN Law tax brackets</p>
+
+      <div class="grid-2" style="margin-bottom: 1.5rem;">
+        <div class="info-box">
+          <h3>Taxable Income Input</h3>
+          <div style="display:flex; flex-direction:column; gap:0.85rem; margin-top:0.75rem;">
+            <label class="selector-label" for="taxIncome">Annual Taxable Income (PHP)</label>
+            <input type="number" id="taxIncome" class="purple-input" min="0" step="0.01" placeholder="e.g. 520000" oninput="computeTax()">
+
+            <div style="display:flex; gap:0.6rem; margin-top:0.35rem;">
+              <button type="button" class="cta-btn small-btn" onclick="computeTax()">Calculate Tax</button>
+              <button type="button" class="cta-btn secondary small-btn" onclick="document.getElementById('taxIncome').value=''; computeTax();">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box" style="display:flex; flex-direction:column; justify-content:center;">
+          <span class="timeline-year" id="bracketTag">Tax Bracket Breakdown</span>
+          <h3 id="taxDue" style="font-size:1.65rem; color:#7c3aed; margin:0.5rem 0;">₱0.00</h3>
+          <p id="taxDetails">Enter your annual taxable income to view basic tax, excess rate, and net income after tax.</p>
+        </div>
+      </div>
+
+      <div class="program-footer">
+        <span class="file-label">Source File: <code>assignment2.html</code></span>
+        <div style="display:flex; gap:0.6rem;">
+          <a href="assignment1.html" class="cta-btn secondary small-btn">&larr; Prev</a>
+          <a href="assignment3.html" class="cta-btn small-btn">Next: Assignment 03 &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function fmtPHP(num) {
+      return '₱' + num.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function computeTax() {
+      const raw = document.getElementById('taxIncome').value;
+      const dueEl = document.getElementById('taxDue');
+      const detEl = document.getElementById('taxDetails');
+      const tagEl = document.getElementById('bracketTag');
+
+      if (raw === '' || isNaN(Number(raw)) || Number(raw) < 0) {
+        dueEl.textContent = '₱0.00';
+        tagEl.textContent = 'Tax Bracket Breakdown';
+        detEl.textContent = 'Enter a non-negative annual taxable income in Philippine Pesos.';
+        return;
+      }
+
+      const income = parseFloat(raw);
+      let tax = 0;
+      let bracket = '';
+
+      if (income <= 250000) {
+        tax = 0;
+        bracket = 'Bracket 1: ₱250,000 and below (0%)';
+      } else if (income <= 400000) {
+        tax = (income - 250000) * 0.15;
+        bracket = 'Bracket 2: Over ₱250,000 to ₱400,000 (15% of excess)';
+      } else if (income <= 800000) {
+        tax = 22500 + (income - 400000) * 0.20;
+        bracket = 'Bracket 3: Over ₱400,000 to ₱800,000 (₱22,500 + 20%)';
+      } else if (income <= 2000000) {
+        tax = 102500 + (income - 800000) * 0.25;
+        bracket = 'Bracket 4: Over ₱800,000 to ₱2,000,000 (₱102,500 + 25%)';
+      } else if (income <= 8000000) {
+        tax = 402500 + (income - 2000000) * 0.30;
+        bracket = 'Bracket 5: Over ₱2,000,000 to ₱8,000,000 (₱402,500 + 30%)';
+      } else {
+        tax = 2202500 + (income - 8000000) * 0.35;
+        bracket = 'Bracket 6: Over ₱8,000,000 (₱2,202,500 + 35%)';
+      }
+
+      const net = income - tax;
+      dueEl.textContent = fmtPHP(tax);
+      tagEl.textContent = bracket;
+      detEl.textContent = `Gross Taxable Income: ${fmtPHP(income)} • Net Income After Tax: ${fmtPHP(net)}`;
+    }
+  </script>
+
+  <footer>
+    &copy; 2026 Jullianne Salutillo Revellame &bull; BS Computer Science 2C &bull; Ateneo de Davao University
+  </footer>
+</body>
+</html>

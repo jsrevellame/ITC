@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jullianne S. Revellame | Personal Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Floating Purple Orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <nav>
+    <button type="button" class="nav-brand" onclick="openTab('about')">
+      <span class="brand-dot"></span> Jullianne S. Revellame
+    </button>
+    <div class="nav-links" role="tablist" aria-label="Portfolio Sections">
+      <button type="button" class="tab-btn active" data-tab="about" onclick="openTab('about')">About</button>
+      <button type="button" class="tab-btn" data-tab="programs" onclick="openTab('programs')">Programs</button>
+      <button type="button" class="tab-btn" data-tab="education" onclick="openTab('education')">Education</button>
+      <button type="button" class="tab-btn" data-tab="experience" onclick="openTab('experience')">Experience</button>
+      <button type="button" class="tab-btn" data-tab="skills" onclick="openTab('skills')">Skills &amp; Hobbies</button>
+      <button type="button" class="tab-btn" data-tab="achievements" onclick="openTab('achievements')">Achievements</button>
+      <button type="button" class="tab-btn" data-tab="contact" onclick="openTab('contact')">Contact</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- TAB 1: About -->
+    <section class="card tab-panel active" id="about" role="tabpanel">
+      <span class="badge">Personal Portfolio</span>
+      <h1 class="gradient-title">Jullianne S. Revellame</h1>
+      <div class="profile-meta">
+        <span class="meta-pill">BS Computer Science 2C</span>
+        <span class="meta-pill">Ateneo de Davao University</span>
+        <span class="meta-pill">Davao City, Philippines</span>
+        <span class="meta-pill">English &bull; Filipino &bull; Cebuano</span>
+      </div>
+
+      <div class="bio-paragraphs">
+        <p>
+          I am an undergraduate student pursuing a Bachelor of Science in Computer Science at Ateneo de Davao University. Prior to shifting to the field of computing, I gained a strong foundation in engineering through my Bachelor of Science in Electronics Engineering at Ateneo de Davao University, where I studied for 4 years.
+        </p>
+        <p>
+          This background provided me with valuable knowledge in electronics, problem-solving, analytical thinking, and technical design, which I now apply in my journey toward software development and computing technologies.
+        </p>
+        <p>
+          I am passionate about continuous learning, technology, and innovation, and I am committed to developing my skills in programming, software engineering, and emerging digital solutions.
+        </p>
+      </div>
+
+      <div class="quick-nav">
+        <button type="button" class="cta-btn" onclick="openTab('programs')">View CS 1130 Programs &rarr;</button>
+        <button type="button" class="cta-btn secondary" onclick="openTab('education')">Academic Background</button>
+        <button type="button" class="cta-btn secondary" onclick="openTab('contact')">Get In Touch</button>
+      </div>
+    </section>
+
+    <!-- TAB 2: Programs (CS 1130 Assignments 1-4) -->
+    <section class="card tab-panel" id="programs" role="tabpanel">
+      <span class="badge">CS 1130 &bull; Introduction to Computing</span>
+      <h2>Programs &amp; Project Assignments</h2>
+      <p class="section-sub">Select a program from the menu below to preview its details and launch the application</p>
+
+      <div class="program-selector-bar">
+        <div class="selector-group">
+          <label for="program-select" class="selector-label">Choose Assignment:</label>
+          <select id="program-select" class="purple-select" onchange="selectProgram(this.value)">
+            <option value="all">Show All Programs (1 – 4)</option>
+            <option value="prog-1">Assignment 01 — Unit Conversion Calculator</option>
+            <option value="prog-2">Assignment 02 — Philippine Income Tax Calculator</option>
+            <option value="prog-3">Assignment 03 — Factorial, Sum &amp; Average of N Natural Numbers</option>
+            <option value="prog-4">Assignment 04 — Simple Payroll Management System</option>
+          </select>
+        </div>
+
+        <div class="program-jump-bar">
+          <button type="button" class="jump-pill active" data-target="all" onclick="selectProgram('all')">All (4)</button>
+          <button type="button" class="jump-pill" data-target="prog-1" onclick="selectProgram('prog-1')">01 &bull; Converter</button>
+          <button type="button" class="jump-pill" data-target="prog-2" onclick="selectProgram('prog-2')">02 &bull; Income Tax</button>
+          <button type="button" class="jump-pill" data-target="prog-3" onclick="selectProgram('prog-3')">03 &bull; Loops &amp; Math</button>
+          <button type="button" class="jump-pill" data-target="prog-4" onclick="selectProgram('prog-4')">04 &bull; Payroll</button>
+        </div>
+      </div>
+
+      <div class="programs-scroll-list">
+        <article class="program-card" id="prog-1">
+          <div class="program-header">
+            <span class="program-num">Assignment 01</span>
+            <span class="program-tag">Conversion Formulas</span>
+          </div>
+          <h3>Unit Conversion Calculator</h3>
+          <p>
+            Interactive conversion tool supporting Fahrenheit &harr; Celsius temperature conversions and Meters &harr; Feet length conversions with instant calculation and input validation.
+          </p>
+          <div class="program-footer">
+            <span class="file-label">File: <code>assignment1.html</code></span>
+            <a href="assignment1.html" class="cta-btn small-btn">Launch Program 1 &rarr;</a>
+          </div>
+        </article>
+
+        <article class="program-card" id="prog-2">
+          <div class="program-header">
+            <span class="program-num">Assignment 02</span>
+            <span class="program-tag">Conditional Logic</span>
+          </div>
+          <h3>Philippine Income Tax Calculator</h3>
+          <p>
+            Computes progressive income tax obligations based on taxable income brackets using multi-tier conditional logic and formatted currency breakdowns.
+          </p>
+          <div class="program-footer">
+            <span class="file-label">File: <code>assignment2.html</code></span>
+            <a href="assignment2.html" class="cta-btn small-btn">Launch Program 2 &rarr;</a>
+          </div>
+        </article>
+
+        <article class="program-card" id="prog-3">
+          <div class="program-header">
+            <span class="program-num">Assignment 03</span>
+            <span class="program-tag">While &bull; Do-While &bull; For Loops</span>
+          </div>
+          <h3>Factorial, Sum &amp; Average of N Natural Numbers</h3>
+          <p>
+            Demonstrates iterative control structures in JavaScript by computing the Nth factorial using a <code>while</code> loop, the sum of the first N numbers using a <code>do-while</code> loop, and the average using a <code>for</code> loop.
+          </p>
+          <div class="program-footer">
+            <span class="file-label">File: <code>assignment3.html</code></span>
+            <a href="assignment3.html" class="cta-btn small-btn">Launch Program 3 &rarr;</a>
+          </div>
+        </article>
+
+        <article class="program-card" id="prog-4">
+          <div class="program-header">
+            <span class="program-num">Assignment 04</span>
+            <span class="program-tag">Arrays &amp; DOM Tables</span>
+          </div>
+          <h3>Simple Payroll Management System</h3>
+          <p>
+            Dynamic payroll ledger allowing users to add employees, calculate gross pay, deductions, and net pay, delete individual rows by line number, and clear the payroll table.
+          </p>
+          <div class="program-footer">
+            <span class="file-label">File: <code>assignment4.html</code></span>
+            <a href="assignment4.html" class="cta-btn small-btn">Launch Program 4 &rarr;</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TAB 3: Education -->
+    <section class="card tab-panel" id="education" role="tabpanel">
+      <span class="badge">Academic Journey</span>
+      <h2>Education</h2>
+      <p class="section-sub">Academic background and honors</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-year">SY 2026 – Present</span>
+          <h3>Bachelor of Science in Computer Science</h3>
+          <p>Ateneo de Davao University (Tertiary)</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-year">SY 2022 – 2026</span>
+          <h3>Bachelor of Science in Electronics &amp; Communication Engineering</h3>
+          <p>Ateneo de Davao University (Tertiary)</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-year">SY 2020 – 2022</span>
+          <h3>Senior High School &mdash; With Honors</h3>
+          <p>Ateneo de Davao University Senior High School</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-year">SY 2016 – 2020</span>
+          <h3>Junior High School &mdash; With Honors</h3>
+          <p>San Pedro College Basic Education Department</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-year">SY 2010 – 2016</span>
+          <h3>Elementary Education</h3>
+          <p>St. Francis Xavier Learning Center (2012–2016) &bull; St. Thomas Aquinas Montessori School (2010–2012)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: Experience & Leadership -->
+    <section class="card tab-panel" id="experience" role="tabpanel">
+      <span class="badge">Service &amp; Tech</span>
+      <h2>Experience &amp; Community Leadership</h2>
+      <p class="section-sub">Hands-on technical work and organizational involvement</p>
+      <div class="grid-2">
+        <div class="info-box">
+          <span class="timeline-year">2015 – 2016</span>
+          <h3>Apple Technical Assistant (OJT)</h3>
+          <p><strong>IFIX Center</strong> &bull; Tulip Drive, Ecoland Street, Davao City<br>
+          Assisted with hardware/software diagnostics, troubleshooting, and repair of Apple devices.</p>
+        </div>
+
+        <div class="info-box">
+          <span class="timeline-year">2021 – 2022</span>
+          <h3>Club President</h3>
+          <p><strong>Arrupe Volunteers' Club</strong><br>
+          Led student outreach initiatives; recognized at the 2022 Club Awarding Ceremony and nominated for a Special Award.</p>
+        </div>
+
+        <div class="info-box">
+          <span class="timeline-year">2022 – Present</span>
+          <h3>Action Group Leader</h3>
+          <p><strong>Holy Trinity Community</strong> &bull; Davao City<br>
+          Facilitates community group activities and youth formation programs.</p>
+        </div>
+
+        <div class="info-box">
+          <span class="timeline-year">2014 – 2020</span>
+          <h3>Choir &amp; Music Ministry</h3>
+          <p><strong>San Isidro Labrador Parish Choir</strong> (2014–2015) &bull; <strong>SPC Choir</strong> (2016–2020)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: Skills & Hobbies -->
+    <section class="card tab-panel" id="skills" role="tabpanel">
+      <span class="badge">Capabilities</span>
+      <h2>Strengths, Technical Skills &amp; Hobbies</h2>
+      <p class="section-sub">Core competencies and personal interests</p>
+
+      <h3 class="sub-heading">Strengths &amp; Technical Skills</h3>
+      <div class="tag-cloud" style="margin-bottom: 1.85rem;">
+        <span class="skill-tag">Troubleshooting</span>
+        <span class="skill-tag">Proper Diagnosis of Software &amp; Hardware</span>
+        <span class="skill-tag">Technical Support</span>
+        <span class="skill-tag">Designing Software Interfaces</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Leadership</span>
+        <span class="skill-tag">Creativity</span>
+        <span class="skill-tag">Attention to Detail</span>
+        <span class="skill-tag">Handling Pressure</span>
+        <span class="skill-tag">Competitive Drive</span>
+        <span class="skill-tag">Honesty &amp; Positivity</span>
+      </div>
+
+      <h3 class="sub-heading">Hobbies &amp; Interests</h3>
+      <div class="tag-cloud">
+        <span class="skill-tag">🎤 Singing</span>
+        <span class="skill-tag">🧮 Solving Math</span>
+        <span class="skill-tag">📷 Photography</span>
+        <span class="skill-tag">📱 Fixing Disabled Phones</span>
+        <span class="skill-tag">🍳 Cooking</span>
+        <span class="skill-tag">🤝 Community Outreach Programs</span>
+        <span class="skill-tag">✈️ Traveling</span>
+      </div>
+    </section>
+
+    <!-- TAB 6: Achievements -->
+    <section class="card tab-panel" id="achievements" role="tabpanel">
+      <span class="badge">Milestones</span>
+      <h2>Honors &amp; Achievements</h2>
+      <p class="section-sub">Academic, leadership, and co-curricular recognition</p>
+      <ul class="achievement-list">
+        <li>Honor Student (2016 – 2022)</li>
+        <li>Kumon Advance Student Honor Roll (2014 – 2017) &amp; Bronze Medalist (2016)</li>
+        <li>Arrupe Volunteers' Club President &amp; Special Award Nominee (2021 – 2022)</li>
+        <li>Perfect Attendance Awardee (2018 – 2020)</li>
+        <li>1st Placer in Karate, Senior White Belt (2018)</li>
+        <li>Intramurals 2nd Runner-Up, Choral Singing (2017) &amp; Glee Club Eureka Member</li>
+        <li>Buwan ng Wika 3rd Runner-Up, Solo Singing (2016)</li>
+        <li>Intramurals 3rd Place Double Oke (2019) &amp; 3rd Runner-Up Folk Dance (2016)</li>
+      </ul>
+    </section>
+
+    <!-- TAB 7: Contact -->
+    <section class="card tab-panel" id="contact" role="tabpanel">
+      <span class="badge">Connect</span>
+      <h2>Contact Information</h2>
+      <p class="section-sub">Feel free to reach out for academic or technical collaborations</p>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span>Email</span>
+          <a href="mailto:jul.revellame@gmail.com">jul.revellame@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span>GitHub</span>
+          <a href="https://github.com/jsrevellame" target="_blank" rel="noopener">github.com/jsrevellame</a>
+        </div>
+        <div class="contact-item">
+          <span>Location</span>
+          <p>Davao City, Philippines</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2026 Jullianne Salutillo Revellame &bull; BS Computer Science 2C &bull; Ateneo de Davao University
+  </footer>
+
+  <script>
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      const targetPanel = document.getElementById(tabId);
+      const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+      if (targetPanel) targetPanel.classList.add('active');
+      if (targetBtn) targetBtn.classList.add('active');
+
+      history.replaceState(null, '', '#' + tabId);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectProgram(selection) {
+      const dropdown = document.getElementById('program-select');
+      if (dropdown && dropdown.value !== selection) {
+        dropdown.value = selection;
+      }
+
+      document.querySelectorAll('.jump-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.dataset.target === selection);
+      });
+
+      const cards = document.querySelectorAll('.program-card');
+      cards.forEach(card => {
+        if (selection === 'all' || card.id === selection) {
+          card.style.display = 'block';
+          card.classList.remove('highlight-pulse');
+          if (selection !== 'all') {
+            void card.offsetWidth;
+            card.classList.add('highlight-pulse');
+          }
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        openTab(hash);
+      }
+    });
+  </script>
+</body>
+</html>

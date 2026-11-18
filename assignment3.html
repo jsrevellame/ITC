@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 03 — Factorial, Sum & Average | Jullianne S. Revellame</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Floating Purple Orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <nav>
+    <a href="index.html#about" class="nav-brand" style="text-decoration:none;">
+      <span class="brand-dot"></span> Jullianne S. Revellame
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about" class="tab-btn" style="text-decoration:none;">&larr; Portfolio</a>
+      <a href="index.html#programs" class="tab-btn" style="text-decoration:none;">All Programs</a>
+      <a href="assignment1.html" class="tab-btn " style="text-decoration:none;">01 &bull; Converter</a>
+      <a href="assignment2.html" class="tab-btn " style="text-decoration:none;">02 &bull; Tax</a>
+      <a href="assignment3.html" class="tab-btn active" style="text-decoration:none;">03 &bull; Loops</a>
+      <a href="assignment4.html" class="tab-btn " style="text-decoration:none;">04 &bull; Payroll</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <span class="badge">CS 1130 &bull; Assignment 03</span>
+      <h2>Factorial, Sum &amp; Average of N Natural Numbers</h2>
+      <p class="section-sub">Demonstrates <code>while</code>, <code>do-while</code>, and <code>for</code> loop structures in JavaScript</p>
+
+      <div class="program-selector-bar">
+        <div class="selector-group">
+          <label class="selector-label" for="nInput">Enter Positive Integer (N):</label>
+          <input type="number" id="nInput" class="purple-input" style="max-width:220px;" min="1" max="170" placeholder="e.g. 5" oninput="runLoops()">
+          <button type="button" class="cta-btn small-btn" onclick="runLoops()">Compute Loops</button>
+        </div>
+      </div>
+
+      <div class="grid-2" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 1.5rem;">
+        <div class="info-box">
+          <span class="timeline-year">While Loop</span>
+          <h3>Nth Factorial (N!)</h3>
+          <p id="factOut" style="font-size:1.35rem; font-weight:800; color:#7c3aed; margin-top:0.4rem;">—</p>
+        </div>
+
+        <div class="info-box">
+          <span class="timeline-year">Do-While Loop</span>
+          <h3>Sum of First N Numbers</h3>
+          <p id="sumOut" style="font-size:1.35rem; font-weight:800; color:#7c3aed; margin-top:0.4rem;">—</p>
+        </div>
+
+        <div class="info-box">
+          <span class="timeline-year">For Loop</span>
+          <h3>Average of First N Numbers</h3>
+          <p id="avgOut" style="font-size:1.35rem; font-weight:800; color:#7c3aed; margin-top:0.4rem;">—</p>
+        </div>
+      </div>
+
+      <div class="program-footer">
+        <span class="file-label">Source File: <code>assignment3.html</code></span>
+        <div style="display:flex; gap:0.6rem;">
+          <a href="assignment2.html" class="cta-btn secondary small-btn">&larr; Prev</a>
+          <a href="assignment4.html" class="cta-btn small-btn">Next: Assignment 04 &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function runLoops() {
+      const n = parseInt(document.getElementById('nInput').value, 10);
+      const factEl = document.getElementById('factOut');
+      const sumEl = document.getElementById('sumOut');
+      const avgEl = document.getElementById('avgOut');
+
+      if (isNaN(n) || n < 1) {
+        factEl.textContent = '—';
+        sumEl.textContent = '—';
+        avgEl.textContent = '—';
+        return;
+      }
+
+      // 1. Nth Factorial using while loop
+      let factorial = 1;
+      let i = 1;
+      while (i <= n) {
+        factorial *= i;
+        i++;
+      }
+
+      // 2. Sum of first N natural numbers using do-while loop
+      let sum = 0;
+      let j = 1;
+      do {
+        sum += j;
+        j++;
+      } while (j <= n);
+
+      // 3. Average of first N natural numbers using for loop
+      let totalForAvg = 0;
+      for (let k = 1; k <= n; k++) {
+        totalForAvg += k;
+      }
+      const avg = totalForAvg / n;
+
+      factEl.textContent = n > 170 ? 'Infinity (Overflow)' : factorial.toLocaleString();
+      sumEl.textContent = sum.toLocaleString();
+      avgEl.textContent = avg.toFixed(2);
+    }
+  </script>
+
+  <footer>
+    &copy; 2026 Jullianne Salutillo Revellame &bull; BS Computer Science 2C &bull; Ateneo de Davao University
+  </footer>
+</body>
+</html>

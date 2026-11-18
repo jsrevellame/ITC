@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 04 — Simple Payroll Management System | Jullianne S. Revellame</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Floating Purple Orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <nav>
+    <a href="index.html#about" class="nav-brand" style="text-decoration:none;">
+      <span class="brand-dot"></span> Jullianne S. Revellame
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about" class="tab-btn" style="text-decoration:none;">&larr; Portfolio</a>
+      <a href="index.html#programs" class="tab-btn" style="text-decoration:none;">All Programs</a>
+      <a href="assignment1.html" class="tab-btn " style="text-decoration:none;">01 &bull; Converter</a>
+      <a href="assignment2.html" class="tab-btn " style="text-decoration:none;">02 &bull; Tax</a>
+      <a href="assignment3.html" class="tab-btn " style="text-decoration:none;">03 &bull; Loops</a>
+      <a href="assignment4.html" class="tab-btn active" style="text-decoration:none;">04 &bull; Payroll</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <span class="badge">CS 1130 &bull; Assignment 04</span>
+      <h2>Simple Payroll Management System</h2>
+      <p class="section-sub">Add employee records, compute net pay, delete rows by line number, or clear the ledger</p>
+
+      <div class="grid-2" style="margin-bottom: 1.25rem;">
+        <div class="info-box">
+          <h3>Add Employee Record</h3>
+          <div style="display:flex; flex-direction:column; gap:0.65rem; margin-top:0.65rem;">
+            <input type="text" id="empName" class="purple-input" placeholder="Employee Name">
+            <input type="number" id="daysWorked" class="purple-input" min="0" step="0.5" placeholder="Days Worked">
+            <input type="number" id="dailyRate" class="purple-input" min="0" step="0.01" placeholder="Daily Rate (PHP)">
+            <input type="number" id="deduction" class="purple-input" min="0" step="0.01" placeholder="Deduction Amount (PHP)">
+            <button type="button" class="cta-btn small-btn" onclick="addEmployee()">+ Add to Payroll</button>
+          </div>
+        </div>
+
+        <div class="info-box" style="display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <h3>Manage Payroll Rows</h3>
+            <p style="margin:0.5rem 0 0.85rem;">Remove a specific employee by their row number or reset the entire table.</p>
+            <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+              <input type="number" id="delLine" class="purple-input" style="max-width:150px;" min="1" placeholder="Line #">
+              <button type="button" class="cta-btn secondary small-btn" onclick="deleteEmployee()">Delete Line</button>
+            </div>
+          </div>
+          <div style="margin-top:1rem; padding-top:0.85rem; border-top:1px solid #ede9fe;">
+            <button type="button" class="cta-btn secondary small-btn" onclick="clearPayroll()">Clear Entire Table</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="overflow-x:auto; margin-bottom:1.5rem; border-radius:16px; border:1px solid #e9d5ff;">
+        <table class="payroll-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Employee Name</th>
+              <th>Days Worked</th>
+              <th>Daily Rate</th>
+              <th>Gross Pay</th>
+              <th>Deduction</th>
+              <th>Net Pay</th>
+            </tr>
+          </thead>
+          <tbody id="payrollBody">
+            <tr>
+              <td colspan="7" style="text-align:center; color:#6b7280; padding:1.25rem;">No employees added yet. Use the form above to add records.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="program-footer">
+        <span class="file-label">Source File: <code>assignment4.html</code></span>
+        <div style="display:flex; gap:0.6rem;">
+          <a href="assignment3.html" class="cta-btn secondary small-btn">&larr; Prev</a>
+          <a href="index.html#programs" class="cta-btn small-btn">Back to Portfolio &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let payrollList = [];
+
+    function fmt(num) {
+      return '₱' + num.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('payrollBody');
+      if (payrollList.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#6b7280; padding:1.25rem;">No employees added yet. Use the form above to add records.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = payrollList.map((emp, idx) => `
+        <tr>
+          <td><strong>${idx + 1}</strong></td>
+          <td>${emp.name}</td>
+          <td>${emp.days}</td>
+          <td>${fmt(emp.rate)}</td>
+          <td>${fmt(emp.gross)}</td>
+          <td>${fmt(emp.deduction)}</td>
+          <td><strong style="color:#6d28d9;">${fmt(emp.net)}</strong></td>
+        </tr>
+      `).join('');
+    }
+
+    function addEmployee() {
+      const name = document.getElementById('empName').value.trim();
+      const days = parseFloat(document.getElementById('daysWorked').value);
+      const rate = parseFloat(document.getElementById('dailyRate').value);
+      const deduction = parseFloat(document.getElementById('deduction').value) || 0;
+
+      if (!name || isNaN(days) || isNaN(rate) || days < 0 || rate < 0) {
+        alert('Please enter a valid employee name, days worked, and daily rate.');
+        return;
+      }
+
+      const gross = days * rate;
+      const net = gross - deduction;
+      payrollList.push({ name, days, rate, gross, deduction, net });
+
+      document.getElementById('empName').value = '';
+      document.getElementById('daysWorked').value = '';
+      document.getElementById('dailyRate').value = '';
+      document.getElementById('deduction').value = '';
+      renderTable();
+    }
+
+    function deleteEmployee() {
+      const line = parseInt(document.getElementById('delLine').value, 10);
+      if (isNaN(line) || line < 1 || line > payrollList.length) {
+        alert('Please enter a valid line number between 1 and ' + payrollList.length + '.');
+        return;
+      }
+      payrollList.splice(line - 1, 1);
+      document.getElementById('delLine').value = '';
+      renderTable();
+    }
+
+    function clearPayroll() {
+      payrollList = [];
+      renderTable();
+    }
+  </script>
+
+  <footer>
+    &copy; 2026 Jullianne Salutillo Revellame &bull; BS Computer Science 2C &bull; Ateneo de Davao University
+  </footer>
+</body>
+</html>

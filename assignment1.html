@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 01 — Unit Conversion Calculator | Jullianne S. Revellame</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Floating Purple Orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <nav>
+    <a href="index.html#about" class="nav-brand" style="text-decoration:none;">
+      <span class="brand-dot"></span> Jullianne S. Revellame
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about" class="tab-btn" style="text-decoration:none;">&larr; Portfolio</a>
+      <a href="index.html#programs" class="tab-btn" style="text-decoration:none;">All Programs</a>
+      <a href="assignment1.html" class="tab-btn active" style="text-decoration:none;">01 &bull; Converter</a>
+      <a href="assignment2.html" class="tab-btn " style="text-decoration:none;">02 &bull; Tax</a>
+      <a href="assignment3.html" class="tab-btn " style="text-decoration:none;">03 &bull; Loops</a>
+      <a href="assignment4.html" class="tab-btn " style="text-decoration:none;">04 &bull; Payroll</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <span class="badge">CS 1130 &bull; Assignment 01</span>
+      <h2>Unit Conversion Calculator</h2>
+      <p class="section-sub">Convert between Fahrenheit &harr; Celsius and Meters &harr; Feet</p>
+
+      <div class="grid-2" style="margin-bottom: 1.5rem;">
+        <div class="info-box">
+          <h3>Conversion Setup</h3>
+          <div style="display:flex; flex-direction:column; gap:0.85rem; margin-top:0.75rem;">
+            <label class="selector-label" for="convType">Conversion Type</label>
+            <select id="convType" class="purple-select" onchange="convertUnit()">
+              <option value="f2c">Fahrenheit (&deg;F) &rarr; Celsius (&deg;C)</option>
+              <option value="c2f">Celsius (&deg;C) &rarr; Fahrenheit (&deg;F)</option>
+              <option value="m2f">Meters (m) &rarr; Feet (ft)</option>
+              <option value="f2m">Feet (ft) &rarr; Meters (m)</option>
+            </select>
+
+            <label class="selector-label" for="inputVal">Input Value</label>
+            <input type="number" id="inputVal" class="purple-input" placeholder="Enter a number..." oninput="convertUnit()">
+
+            <div style="display:flex; gap:0.6rem; margin-top:0.35rem;">
+              <button type="button" class="cta-btn small-btn" onclick="convertUnit()">Convert</button>
+              <button type="button" class="cta-btn secondary small-btn" onclick="clearConv()">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box" style="display:flex; flex-direction:column; justify-content:center;">
+          <span class="timeline-year">Converted Output</span>
+          <h3 id="resultDisplay" style="font-size:1.65rem; color:#7c3aed; margin:0.5rem 0;">—</h3>
+          <p id="formulaDisplay">Select a conversion mode and enter a value to see the step-by-step formula.</p>
+        </div>
+      </div>
+
+      <div class="program-footer">
+        <span class="file-label">Source File: <code>assignment1.html</code></span>
+        <a href="assignment2.html" class="cta-btn small-btn">Next: Assignment 02 &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function convertUnit() {
+      const type = document.getElementById('convType').value;
+      const raw = document.getElementById('inputVal').value;
+      const resEl = document.getElementById('resultDisplay');
+      const formEl = document.getElementById('formulaDisplay');
+
+      if (raw === '' || isNaN(Number(raw))) {
+        resEl.textContent = '—';
+        formEl.textContent = 'Enter a valid numeric value to calculate.';
+        return;
+      }
+
+      const val = parseFloat(raw);
+      let result = 0;
+      let label = '';
+      let formula = '';
+
+      if (type === 'f2c') {
+        result = (val - 32) * 5 / 9;
+        label = `${result.toFixed(2)} °C`;
+        formula = `Formula: (${val} °F − 32) × 5/9 = ${result.toFixed(4)} °C`;
+      } else if (type === 'c2f') {
+        result = (val * 9 / 5) + 32;
+        label = `${result.toFixed(2)} °F`;
+        formula = `Formula: (${val} °C × 9/5) + 32 = ${result.toFixed(4)} °F`;
+      } else if (type === 'm2f') {
+        result = val * 3.28084;
+        label = `${result.toFixed(2)} ft`;
+        formula = `Formula: ${val} m × 3.28084 = ${result.toFixed(4)} ft`;
+      } else if (type === 'f2m') {
+        result = val / 3.28084;
+        label = `${result.toFixed(2)} m`;
+        formula = `Formula: ${val} ft ÷ 3.28084 = ${result.toFixed(4)} m`;
+      }
+
+      resEl.textContent = label;
+      formEl.textContent = formula;
+    }
+
+    function clearConv() {
+      document.getElementById('inputVal').value = '';
+      convertUnit();
+    }
+  </script>
+
+  <footer>
+    &copy; 2026 Jullianne Salutillo Revellame &bull; BS Computer Science 2C &bull; Ateneo de Davao University
+  </footer>
+</body>
+</html>
